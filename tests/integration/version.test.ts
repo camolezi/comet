@@ -6,16 +6,11 @@ const versionFixture = {
 };
 
 describe("ENDPOINT /version", function () {
-  it("Should return the current version of the running app", function (done) {
-    chai
-      .request(app)
-      .get("/version")
-      .end(function (err, res) {
-        expect(res).to.have.status(200);
-        expect(res).to.be.json;
-        expect(res.body).to.be.eql(versionFixture);
+  it("Should return the current version of the running app", async function () {
+    const res = await chai.request(app).get("/version");
 
-        done();
-      });
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.be.eql(versionFixture);
   });
 });
