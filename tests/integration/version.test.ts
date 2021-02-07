@@ -1,11 +1,8 @@
 import chai, { expect } from "chai";
-import chaiHttp from "chai-http";
 import app from "../../src/app";
 
-chai.use(chaiHttp);
-
 const versionFixture = {
-  version: 1,
+  version: "1.0",
 };
 
 describe("ENDPOINT /version", function () {
