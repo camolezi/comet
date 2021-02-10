@@ -1,7 +1,7 @@
-import { Schema } from "mongoose";
+import { ObjectId, Schema } from "mongoose";
 
 interface User {
-  _id?: string;
+  _id?: ObjectId;
   name: string;
   email: string;
 }
