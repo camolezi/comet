@@ -1,5 +1,5 @@
 import express from "express";
-import UserController from "./controllers/user_controller";
+import UserController from "./controllers/user.controller";
 import { startDBConnection } from "./database/db.connection";
 import UserRepository from "./database/user.repository";
 

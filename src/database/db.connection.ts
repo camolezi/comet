@@ -6,9 +6,6 @@ export function startDBConnection(): mongoose.Connection {
     useUnifiedTopology: true,
   });
   conn.on("error", console.error.bind(console, "connection error:"));
-  conn.once("open", function () {
-    console.log("Connected database");
-  });
 
   return conn;
 }

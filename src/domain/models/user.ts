@@ -1,13 +1,14 @@
-export interface User {
+import { Schema } from "mongoose";
+
+interface User {
+  _id?: string;
   name: string;
   email: string;
 }
 
-import { Schema } from "mongoose";
-
-const UserSchema = new Schema({
+export const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
 });
 
-export default UserSchema;
+export default User;

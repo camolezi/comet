@@ -9,7 +9,7 @@ function UserController(userRepository: UserRepository): Router {
     res.status(StatusCodes.CREATED);
 
     const createdUser = await userRepository.saveNewUser(req.body);
-    res.json(createdUser.toJSON());
+    res.json(createdUser);
   });
 
   return userRouter;
