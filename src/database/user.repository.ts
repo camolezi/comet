@@ -12,8 +12,14 @@ class UserRepository {
     return this.userModel.findById(id).lean();
   }
 
+  async getUserByEmail(email: string): Promise<User> {
+    return await this.userModel.findOne({ email }).lean();
+  }
+
   async saveNewUser(user: User): Promise<User> {
-    return (await this.userModel.create(user)).toObject() as User;
+    const userDoc = await this.userModel.create(user);
+    const userObj = userDoc.toObject();
+    return { ...userObj, _id: userObj._id.toString() } as User;
   }
 }
 

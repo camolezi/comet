@@ -12,6 +12,13 @@ function UserController(userRepository: UserRepository): Router {
     res.json(createdUser);
   });
 
+  userRouter.get("/", async (req, res) => {
+    res.status(StatusCodes.OK);
+
+    const user = await userRepository.getUserByEmail(req.body.email);
+    res.json(user);
+  });
+
   return userRouter;
 }
 
