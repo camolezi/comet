@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
-import UserRepository from "../database/user.repository";
+import UserRepository from "../persistence/user.repository";
 
 function UserController(userRepository: UserRepository): Router {
   const userRouter = Router();

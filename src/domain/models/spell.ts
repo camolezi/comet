@@ -1,6 +1,7 @@
 import { Schema } from "mongoose";
 
 export default interface Spell {
+  _id?: string;
   name: string;
 }
 

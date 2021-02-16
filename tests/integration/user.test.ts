@@ -1,7 +1,7 @@
 import chai, { expect } from "chai";
 import app from "../../src/app";
-import { startDBConnection } from "../../src/database/db.connection";
-import UserRepository from "../../src/database/user.repository";
+import { startDBConnection } from "../../src/persistence/db.connection";
+import UserRepository from "../../src/persistence/user.repository";
 import User, { UserSchema } from "../../src/domain/models/user";
 
 const createUserFixture = (

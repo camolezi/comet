@@ -1,7 +1,9 @@
 import express from "express";
+import SpellController from "./controllers/spell.controller";
 import UserController from "./controllers/user.controller";
-import { startDBConnection } from "./database/db.connection";
-import UserRepository from "./database/user.repository";
+import { startDBConnection } from "./persistence/db.connection";
+import SpellRepository from "./persistence/spell.repository";
+import UserRepository from "./persistence/user.repository";
 
 const app = express();
 
@@ -14,6 +16,10 @@ app.get("/version", (req, res) => {
 const userConn = startDBConnection();
 const userRepository = new UserRepository(userConn);
 
+const spellConn = startDBConnection();
+const spellRepository = new SpellRepository(spellConn);
+
 app.use("/users", UserController(userRepository));
+app.use("/spells", SpellController(spellRepository));
 
 export default app;
