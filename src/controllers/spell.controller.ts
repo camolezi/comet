@@ -8,8 +8,15 @@ function SpellController(spellRepository: SpellRepository): Router {
   spellRouter.get("/:spellName", async (req, res) => {
     res.status(StatusCodes.OK);
 
-    const user = await spellRepository.getSpellByName(req.params.spellName);
-    res.json(user);
+    const spell = await spellRepository.getSpellByName(req.params.spellName);
+    res.json(spell);
+  });
+
+  spellRouter.get("/id/:spellId", async (req, res) => {
+    res.status(StatusCodes.OK);
+
+    const spell = await spellRepository.getSpellById(req.params.spellId);
+    res.json(spell);
   });
 
   return spellRouter;

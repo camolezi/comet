@@ -39,4 +39,23 @@ describe("ENDPOINT /spells", function () {
       expect(response.body).to.eql(savedSpell);
     });
   });
+
+  describe("GET /spells/:spellID", function () {
+    it("should return the spell with the specified id", async function () {
+      const spellFixure = createSpellFixture();
+
+      const spellConnection = startDBConnection();
+      const spellRepository = new SpellRepository(spellConnection);
+
+      const savedSpell = await spellRepository.saveNewSpell(spellFixure);
+      spellConnection.close();
+
+      const response = await chai
+        .request(app)
+        .get(`/spells/id/${savedSpell._id}`);
+
+      expect(response).to.have.status(200);
+      expect(response.body).to.eql(savedSpell);
+    });
+  });
 });

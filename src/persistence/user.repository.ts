@@ -1,5 +1,5 @@
 import User, { UserSchema } from "../domain/models/user";
-import mongoose, { ObjectId } from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 class UserRepository {
   private readonly userModel: mongoose.Model<mongoose.Document>;
@@ -8,7 +8,7 @@ class UserRepository {
     this.userModel = conn.model("users", UserSchema);
   }
 
-  async getUserById(id: ObjectId): Promise<User> {
+  async getUserById(id: Types.ObjectId): Promise<User> {
     return this.userModel.findById(id).lean();
   }
 

@@ -1,4 +1,4 @@
-import mongoose, { ObjectId } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import Spell, { SpellSchema } from "../domain/models/spell";
 
 class SpellRepository {
@@ -8,7 +8,7 @@ class SpellRepository {
     this.spellModel = conn.model("spells", SpellSchema);
   }
 
-  async getSpellById(id: ObjectId): Promise<Spell> {
+  async getSpellById(id: Types.ObjectId | string): Promise<Spell> {
     return this.spellModel.findById(id).lean();
   }
 
