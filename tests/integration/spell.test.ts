@@ -21,31 +21,8 @@ describe("ENDPOINT /spells", function () {
     });
   });
 
-  describe("POST /spells", function () {
-    it("should create a new spell", async function () {
-      const spellFixture = createSpellFixture();
-
-      const response = await chai
-        .request(app)
-        .post("/spells")
-        .send(spellFixture);
-
-      expect(response).to.have.status(201);
-      expect(response.body).to.have.property("_id");
-      expect(response.body).to.deep.contain(spellFixture);
-
-      const userConn = startDBConnection();
-      const spellRepository = new SpellRepository(userConn);
-
-      const savedUser = await spellRepository.getSpellById(response.body._id);
-      expect(savedUser).to.deep.contain(spellFixture);
-
-      userConn.close();
-    });
-  });
-
-  describe("GET /users", function () {
-    it("should return the user object", async function () {
+  describe("GET /spells/:spellName", function () {
+    it("should return the spell with the specified name", async function () {
       const spellFixure = createSpellFixture();
 
       const spellConnection = startDBConnection();
@@ -56,8 +33,7 @@ describe("ENDPOINT /spells", function () {
 
       const response = await chai
         .request(app)
-        .get("/spells")
-        .send({ name: savedSpell.name });
+        .get(`/spells/${savedSpell.name}`);
 
       expect(response).to.have.status(200);
       expect(response.body).to.eql(savedSpell);
