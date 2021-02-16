@@ -6,10 +6,9 @@ import User, { UserSchema } from "../../src/domain/models/user";
 
 const createUserFixture = (
   name = "TestName",
-  email = "testEmail@mail.com",
-  tasks = []
+  email = "testEmail@mail.com"
 ): User => {
-  return { name, email, tasks };
+  return { name, email };
 };
 
 describe("ENDPOINT /users", function () {
