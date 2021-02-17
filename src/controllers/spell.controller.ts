@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
+
 import SpellRepository from "../persistence/spell.repository";
 
 function SpellController(spellRepository: SpellRepository): Router {

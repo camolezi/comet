@@ -42,6 +42,15 @@ describe("ENDPOINT /users", function () {
 
       userConn.close();
     });
+
+    it("should return a error response if json is not valid", async function () {
+      const response = await chai
+        .request(app)
+        .post("/users")
+        .send({ nam: "invalid name" });
+
+      expect(response).to.have.status(500); // TODO - Error handling, this should be a 400;
+    });
   });
 
   describe("GET /users", function () {
