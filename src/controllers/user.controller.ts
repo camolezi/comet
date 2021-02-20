@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import UserRepository from "../persistence/user.repository";
 
@@ -20,30 +20,29 @@ function UserController(userRepository: UserRepository): Router {
 }
 
 const UserPostHandler = (userRepository: UserRepository) => (
-  req,
-  res,
-  next
-) => {
-  res.status(StatusCodes.CREATED);
+  req: Request,
+  res: Response,
+  error: NextFunction
+) =>
+  EitherAsync.liftEither(validateUserJson(req.body))
+    .map((user) => userRepository.saveNewUser(user))
+    .ifRight(respondWithJson(res)(StatusCodes.CREATED))
+    .ifLeft(error)
+    .run();
 
-  const saveNewUser = (receivedUser) =>
-    userRepository.saveNewUser(receivedUser);
-
-  const respondWithJson = (createdUser) => res.json(createdUser);
-
-  const callErrorMiddleware = (e) => next(e);
-
+const validateUserJson = (jsonBody: unknown) => {
   const userCodec = Codec.interface({
     name: string,
     email: string,
   });
-  const receivedUser = userCodec.decode(req.body);
+  return userCodec.decode(jsonBody);
+};
 
-  EitherAsync.liftEither(receivedUser)
-    .map(saveNewUser)
-    .ifRight(respondWithJson)
-    .ifLeft(callErrorMiddleware)
-    .run();
+const respondWithJson = (res: Response) => (status: StatusCodes) => (
+  json: unknown
+) => {
+  res.status(status);
+  res.json(json);
 };
 
 export default UserController;
