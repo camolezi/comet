@@ -7,7 +7,8 @@
     "start": "npm run build:live",
     "build": "tsc -p .",
     "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts",
-    "test": "mocha  --extension ts -w -r ts-node/register -r config/mocha/chai.plugins.ts  --recursive tests/"
+    "test": "mocha  --extension ts -w -r ts-node/register -r config/mocha/chai.plugins.ts  --recursive tests/",
+    "updateSpells": "ts-node data/build.spells.data.ts"
   },
   "author": "Camolezi",
   "license": "MIT",
@@ -20,6 +21,7 @@
     "@types/mongodb": "^3.6.6",
     "@types/mongoose": "^5.10.3",
     "@types/node": "^14.14.25",
+    "@types/node-fetch": "^2.5.8",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "chai": "^4.3.0",
@@ -40,6 +42,7 @@
     "http-status-codes": "^2.1.4",
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.15",
+    "node-fetch": "^2.6.1",
     "purify-ts": "^0.16.1"
   }
 }
