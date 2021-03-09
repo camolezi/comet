@@ -14,8 +14,6 @@ async function fetchSpells(url: string) {
   const data = await fetch(`${url}/api/spells`);
   const spellsIndexes = await data.json();
 
-  console.log(spellsIndexes);
-
   const spells = spellsIndexes.results.map(async (spellIndex) => {
     const spellData = await fetch(`${url}${spellIndex.url}`);
     return await spellData.json();
